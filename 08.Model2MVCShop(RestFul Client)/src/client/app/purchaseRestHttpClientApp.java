@@ -37,7 +37,7 @@ public class purchaseRestHttpClientApp {
 		
 //		System.out.println("\n==========1==========================\n");
 //		// 2.1 Http Post 방식 Request : JsonSimple lib 사용
-		purchaseRestHttpClientApp.addPurchaseTest_JsonSimple();
+//		purchaseRestHttpClientApp.addPurchaseTest_JsonSimple();
 		
 //		System.out.println("\n====================================\n");
 //		// 2.2 Http Post 방식 Request : CodeHaus lib 사용
