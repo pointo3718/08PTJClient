@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.model2.mvc.service.domain.Product;
+import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.Search;
 import com.model2.mvc.service.domain.User;
 
@@ -28,42 +29,42 @@ public class purchaseRestHttpClientApp {
 	public static void main(String[] args) throws Exception{
 
 //		System.out.println("\n====================================\n");
-//		prodRestHttpClientApp.getProductTest_JsonSimple();	
+//		purchaseRestHttpClientApp.getPurchaseTest_JsonSimple();	
 		
 //		System.out.println("\n====================================\n");
 //		// 1.2 Http Get 방식 Request : CodeHaus lib 사용
-//		prodRestHttpClientApp.getProductTest_Codehaus();
+//		purchaseRestHttpClientApp.getPurchaseTest_Codehaus();
 		
 //		System.out.println("\n==========1==========================\n");
 //		// 2.1 Http Post 방식 Request : JsonSimple lib 사용
-//		prodRestHttpClientApp.addProductTest_JsonSimple();
+//		purchaseRestHttpClientApp.addPurchaseTest_JsonSimple();
 		
 //		System.out.println("\n====================================\n");
 //		// 2.2 Http Post 방식 Request : CodeHaus lib 사용
-//		prodRestHttpClientApp.addProductTest_Codehaus();		
+//		purchaseRestHttpClientApp.addProductTest_Codehaus();		
 	
 //		System.out.println("\n====================================\n");
-//		prodRestHttpClientApp.updateProductTest_JsonSimple();			
+//		purchaseRestHttpClientApp.updateProductTest_JsonSimple();			
 
 //		System.out.println("\n====================================\n");
-//		prodRestHttpClientApp.updateProductTest_Codehaus();
+//		purchaseRestHttpClientApp.updateProductTest_Codehaus();
 		
 //		System.out.println("\n====================================\n");
-//		prodRestHttpClientApp.listProductTest_JsonSimple();	
+//		purchaseRestHttpClientApp.listProductTest_JsonSimple();	
 		
 //		System.out.println("\n====================================\n");
-//		prodRestHttpClientApp.listProductTest_Codehaus();		
+//		purchaseRestHttpClientApp.listProductTest_Codehaus();		
 		
 		
 	}
 
 //================================================================//
-	public static void getProductTest_JsonSimple() throws Exception{
+	public static void getPurchaseTest_JsonSimple() throws Exception{
 		
 		// HttpClient : Http Protocol 의 client 추상화 
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= "http://127.0.0.1:8080/product/json/getProduct/10064";
+		String url= "http://127.0.0.1:8080/purchase/json/getPurchase/10000";
 				
 		// HttpGet : Http Protocol 의 GET 방식 Request
 		HttpGet httpGet = new HttpGet(url);
@@ -97,12 +98,12 @@ public class purchaseRestHttpClientApp {
 
 	
 	//1.2 Http Protocol GET Request : JsonSimple + codehaus 3rd party lib 사용
-	public static void getProductTest_Codehaus() throws Exception{
+	public static void getPurchaseTest_Codehaus() throws Exception{
 		
 		// HttpClient : Http Protocol 의 client 추상화 
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url= "http://127.0.0.1:8080/product/json/getProduct/10064";
+		String url= "http://127.0.0.1:8080/purchase/json/getPurchase/10000";
 		
 		// HttpGet : Http Protocol 의 GET 방식 Request
 		HttpGet httpGet = new HttpGet(url);
@@ -128,19 +129,19 @@ public class purchaseRestHttpClientApp {
 		System.out.println(jsonobj);
 	
 		ObjectMapper objectMapper = new ObjectMapper();
-		 Product product = objectMapper.readValue(jsonobj.toString(), Product.class);
-		 System.out.println(product);
+		 Purchase purchase = objectMapper.readValue(jsonobj.toString(), Purchase.class);
+		 System.out.println(purchase);
 	}
 //================================================================//	
 //	
 //================================================================//
 	//2.1 Http Protocol POST Request : FromData 전달 / JsonSimple 3rd party lib 사용
-	public static void addProductTest_JsonSimple() throws Exception{
+	public static void addPurchaseTest_JsonSimple() throws Exception{
 		
 		// HttpClient : Http Protocol 의 client 추상화 
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		String url = "http://127.0.0.1:8080/product/json/addProduct";
+		String url = "http://127.0.0.1:8080/purchase/json/addPurchase";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Content-Type", "application/json");
@@ -151,11 +152,19 @@ public class purchaseRestHttpClientApp {
 		
 		//[ 방법 2 : JSONObject 사용]
 		JSONObject json = new JSONObject();
-		json.put("prodName", "멜론");
-		json.put("prodDetail", "맜있는멜론");
-		json.put("manuDate", "2022-04-05");
-		json.put("price", 5000);
-		json.put("fileName", "멜론");
+		json.put("purchaseProd.prodNo", "10055");
+		json.put("prodName", "맥주");
+		json.put("prodDetail", "청량한맥주");
+		json.put("manuDate", "2022-05-04");
+		json.put("price", 4000);
+		json.put("buyerId.userId", "user03");
+		json.put("paymentOption", "1");
+		json.put("receiverName", "테스터03");
+		json.put("receiverPhone", "010-3333-3333");
+		json.put("divyAddr", "강서구");
+		json.put("divyRequest", "레스컨트롤되려나");
+		json.put("divyDate", "2022-05-04");
+		json.put("tranCode", "1");
 		HttpEntity httpEntity01 = new StringEntity(json.toString(),"utf-8");
 
 		httpPost.setEntity(httpEntity01);
@@ -185,7 +194,7 @@ public class purchaseRestHttpClientApp {
 	
 	//2.2 Http Protocol POST 방식 Request : FromData전달 
 	//==> JsonSimple + codehaus 3rd party lib 사용
-	public static void addProductTest_Codehaus() throws Exception{
+	public static void addPurchaseTest_Codehaus() throws Exception{
 		
 		// HttpClient : Http Protocol 의 client 추상화 
 		HttpClient httpClient = new DefaultHttpClient();
